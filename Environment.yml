@@ -1,9 +1,0 @@
-name: hdi
-channels:
-  - conda-forge
-  - defaults
-dependencies:
-  - bokeh=0.13.0=py36_0
-  - ipywidgets=7.4.2=py_0
-  - widgetsnbextension=3.4.2=py36_0
-  - pandas=0.23.4

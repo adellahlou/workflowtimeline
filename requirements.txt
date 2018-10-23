@@ -1,2 +1,6 @@
 azure-kusto-data==0.0.11
 azure-kusto-ingest==0.0.11
+bokeh==0.13.0
+ipywidgets==7.4.2
+widgetsnbextension==3.4.2
+pandas==0.23.4
