@@ -43,7 +43,7 @@ def showtimeline():
     if wft.get_widgets() is None:
         print("No search performed yet. Please perform a cluster search first.")
     else:
-        if len(wft.workflowtimeline):
+        if wft.workflowtimeline is None or not len(wft.workflowtimeline):
             print("No results found. Double check clusterDnsName and try a new date range.")
         else:
             show(column(wft.get_widgets(), sizing_mode='scale_width'))
