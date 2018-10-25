@@ -7,10 +7,11 @@ class WorkflowTimeline(Query):
        'ClusterDnsName', 'Workflow', 'Activity', 'ActivityStatus', 'Result',
        'Details', 'Class', 'Role']
     name = 'workflowtimeline'
-    template_string = """LogEntry 
-| where ClusterDnsName ==  "{0}" and PreciseTimeStamp >= datetime({1}) and PreciseTimeStamp <= datetime({2})
+    template_string = """let cname = tolower(trim(@"\s*", "{0}"));
+LogEntry
+| where tolower(ClusterDnsName) ==  cname and PreciseTimeStamp >= datetime({1}) and PreciseTimeStamp <= datetime({2})
 | join kind= anti (
-   DeploymentApiRequestEvent | where ResourceName == "{0}" and PreciseTimeStamp <= datetime({2}) and Method == "GET"  
+   DeploymentApiRequestEvent | where tolower(ResourceName) == cname and PreciseTimeStamp <= datetime({2}) and Method == "GET"
 ) on ActivityId 
 | sort by PreciseTimeStamp asc
 | project PreciseTimeStamp, TraceLevel, ActivityId, Class, Component, Details, Role, EventId, ClusterDnsName

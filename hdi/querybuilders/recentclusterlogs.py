@@ -6,10 +6,11 @@ class RecentLogs(Query):
     default_columns = ['PreciseTimeStamp', 'TraceLevel', 'ActivityId', 'Class', 'Details',
        'Component', 'Role', 'EventId', 'ClusterDnsName']
     name = 'recentlogs'
-    template_string = """LogEntry 
-| where ClusterDnsName == "{0}" and PreciseTimeStamp >= datetime({1}) and PreciseTimeStamp <= datetime({2})
+    template_string = """let cname = tolower(trim(@"\s*", "{0}"));
+LogEntry
+| where tolower(ClusterDnsName) == cname and PreciseTimeStamp >= datetime({1}) and PreciseTimeStamp <= datetime({2})
 | join kind= anti (
-   DeploymentApiRequestEvent | where ResourceName startswith "{0}" and PreciseTimeStamp < datetime({2}) and Method == "GET"  
+   DeploymentApiRequestEvent | where tolower(ResourceName) == cname and PreciseTimeStamp <= datetime({2}) and Method == "GET"
 ) on ActivityId 
 | project PreciseTimeStamp, TraceLevel, ActivityId, Class, Details, Component, Role, EventId, ClusterDnsName
 | sort by PreciseTimeStamp asc"""

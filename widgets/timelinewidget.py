@@ -97,7 +97,7 @@ class TimelineWidget(object):
         
         legend = Legend(items=scrubber_legends_items)
         legend.click_policy = 'hide'
-        #scrubber.add_layout(legend, 'left')
+        scrubber.add_layout(legend, 'left')
         return scrubber
     
     @classmethod
