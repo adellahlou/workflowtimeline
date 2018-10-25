@@ -8,3 +8,9 @@ jt -t oceans16 -f roboto -cellw 85%
 jupyter nbextension enable hide_input_all/main
 jupyter nbextension enable init_cell/main
 jupyter nbextension enable hide_input/main
+
+if [ ! -f ~/.jupyter/jupyter_notebook_config.py]; then
+    jupyter notebook --generate-config
+fi
+
+python3 configure.py
