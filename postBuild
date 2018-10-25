@@ -4,13 +4,13 @@ jupyter nbextension enable --py widgetsnbextension
 # Notebooks w/ extensions that auto-run code must be "trusted" to work the first time
 jupyter trust workflowtimeline.ipynb
 
-jt -t oceans16 -f roboto -cellw 85%
+jt -t oceans16 -f roboto -cellw 100%
 jupyter nbextension enable hide_input_all/main
 jupyter nbextension enable init_cell/main
 jupyter nbextension enable hide_input/main
 
-if [ ! -f ~/.jupyter/jupyter_notebook_config.py]; then
-    jupyter notebook --generate-config
+if [ ! -f ~/.jupyter/jupyter_notebook_config.py ]; then 
+    jupyter notebook --generate-config --yes 
 fi
 
 python3 configure.py

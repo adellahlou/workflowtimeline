@@ -17,7 +17,7 @@ LogEntry
 | project PreciseTimeStamp, TraceLevel, ActivityId, Class, Component, Details, Role, EventId, ClusterDnsName
 | parse kind = regex flags = i Details with "Workflow " Workflow:string "WorkFlow " WorkflowStatus:string "([.]| )" Activity:string "(Activity )" ActivityStatus:string "[.]( *Result: )?"  Result:string "$"
 | where isnull(Workflow)  == false and isempty(Workflow) == false
-| sort by Workflow, Activity, PreciseTimeStamp asc
+| sort by Workflow, Activity, PreciseTimeStamp asc, strlen(Result) asc
 | extend rn=row_number(1, prev(Activity) != Activity or prev(Workflow) != Workflow),  prevActivityStatus = prev(ActivityStatus, 1), prevResult = prev(Result, 1), prevPreciseTimeStamp = prev(PreciseTimeStamp, 1)
 | extend rnsum=row_cumsum(rn, prev(Activity) != Activity or prev(Workflow) != Workflow)
 | where rnsum == 3

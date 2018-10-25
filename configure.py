@@ -2,7 +2,7 @@
 from notebook.auth import passwd 
 import os
 
-pwhash = "sha1:90b58bbedb1d:afd960baa6013c9cb51a4b28a12affb3e22f1c24"
+pwhash = 'sha1:55f50cfd94ca:9e3ad0a0bfe9767e0bcc6d4f8ee74eb144bbf5eb'
 jupyter_config = os.path.expanduser('~/.jupyter/jupyter_notebook_config.py')
 
 jupyter_comment_start = "# Start of lines added by jupyter-password.py"
