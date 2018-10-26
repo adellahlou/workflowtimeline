@@ -3,7 +3,7 @@ from types import SimpleNamespace
 from widgets import TimelineWidget, utils as widgetutils
 from util import datautils
 
-from bokeh.models.tools import BoxSelectTool, HoverTool, ResetTool, SaveTool, WheelZoomTool 
+from bokeh.models.tools import BoxSelectTool, BoxZoomTool, HoverTool, ResetTool, SaveTool, TapTool, WheelZoomTool
 
 class WorkflowTimeline(object):
     """"""
@@ -105,10 +105,12 @@ class WorkflowTimeline(object):
     @classmethod
     def __create_tools(cls, **hoverkwargs):
         return [
+            TapTool(),
             BoxSelectTool(dimensions='width'),
             BoxSelectTool(dimensions='height'),
             BoxSelectTool(),
             WheelZoomTool(),
+            BoxZoomTool(),
             ResetTool(),
             SaveTool(),
             HoverTool(
